@@ -135,6 +135,9 @@ public class Tienda extends javax.swing.JFrame {
         rbt_si1 = new javax.swing.JRadioButton();
         rbt_no1 = new javax.swing.JRadioButton();
         tf_Fabricante1 = new javax.swing.JTextField();
+        jPopupMenu2 = new javax.swing.JPopupMenu();
+        Modjuego = new javax.swing.JMenuItem();
+        elimjuego = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
@@ -521,6 +524,11 @@ public class Tienda extends javax.swing.JFrame {
         jLabel29.setForeground(new java.awt.Color(0, 0, 0));
         jLabel29.setText("Listar Juegos");
 
+        lt_juegos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lt_juegosMouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(lt_juegos);
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
@@ -902,6 +910,17 @@ public class Tienda extends javax.swing.JFrame {
                     .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
+
+        Modjuego.setText("Modificar juego");
+        Modjuego.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ModjuegoActionPerformed(evt);
+            }
+        });
+        jPopupMenu2.add(Modjuego);
+
+        elimjuego.setText("eliminar Juego");
+        jPopupMenu2.add(elimjuego);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -1622,7 +1641,7 @@ public class Tienda extends javax.swing.JFrame {
     private void bt_agregarestat1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_agregarestat1MouseClicked
         // TODO add your handling code here:
         try {
-            double prec=Double.parseDouble(tf_Precio3.getText());
+            double prec = Double.parseDouble(tf_Precio3.getText());
             Estacionaria t = (Estacionaria) consolas.get(tb_listar.getSelectedRow());
             t.setAlmacenamiento((Integer) Sp_espacio1.getValue());
             t.setAnios_uso((Integer) Sp_uso3.getValue());
@@ -1631,14 +1650,13 @@ public class Tienda extends javax.swing.JFrame {
             t.setModelo(tf_Model3.getText());
             t.setPrecio(prec);
             t.setTipo_con(tf_conexion1.getText());
-           
+
             JOptionPane.showMessageDialog(null, "Modificado");
             tf_Fabricante3.setText("");
             tf_Precio3.setText("");
             tf_Model3.setText("");
             tf_conexion1.setText("");
-            
-            
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error");
         }
@@ -1649,20 +1667,20 @@ public class Tienda extends javax.swing.JFrame {
     private void bt_agregarport1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_agregarport1MouseClicked
         // TODO add your handling code here:
         try {
-            double prec=Double.parseDouble(tf_Precio1.getText());
-            boolean s=false;
-            if(rbt_si1.isSelected()){
-                s=true;
+            double prec = Double.parseDouble(tf_Precio1.getText());
+            boolean s = false;
+            if (rbt_si1.isSelected()) {
+                s = true;
             }
             Portatil t = (Portatil) consolas.get(tb_listar.getSelectedRow());
-            t.setAnios_uso((Integer)Sp_uso4.getValue());
-            t.setBateria((Integer)Sp_bateria1.getValue());
+            t.setAnios_uso((Integer) Sp_uso4.getValue());
+            t.setBateria((Integer) Sp_bateria1.getValue());
             t.setEstuche(s);
             t.setFabricante(tf_Fabricante1.getText());
             t.setModelo(tf_Model1.getText());
             t.setTam_pant(cb_tampant1.getSelectedItem().toString());
             JOptionPane.showMessageDialog(this, "Modificado");
-            
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error");
         }
@@ -1671,6 +1689,43 @@ public class Tienda extends javax.swing.JFrame {
     private void bt_agregarestat1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_agregarestat1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_bt_agregarestat1ActionPerformed
+
+    private void ModjuegoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModjuegoActionPerformed
+        // TODO add your handling code here:
+        try {
+            double as = Double.parseDouble(tf_price1.getText());
+            Juego j = consolas.get(tb_listar.getSelectedRow()).getJuegos().get(lt_juegos.getSelectedIndex());
+            boolean add = false, rent = false, nvo = false;
+            if (rbt_nvo1.isSelected()) {
+                nvo = true;
+            }
+            if (rbt_rent1.isSelected()) {
+                rent = true;
+            }
+            if (rbt_dlc1.isSelected()) {
+                add = true;
+            }
+            j.setAgregado(add);
+            j.setCant_disp((Integer) sp_num1.getValue());
+            j.setDescripcion(ta_desc1.getText());
+            j.setLanzamiento(Dc_lanzamiento1.getDate());
+            j.setNombre(tf_nomjuego1.getText());
+            j.setNuevo(nvo);
+            j.setPrecio(as);
+            j.setRentable(rent);
+            JOptionPane.showMessageDialog(this, "Modificado");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error");
+        }
+    }//GEN-LAST:event_ModjuegoActionPerformed
+
+    private void lt_juegosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lt_juegosMouseClicked
+        // TODO add your handling code here:
+        if(evt.isMetaDown()){
+            jPopupMenu2.show(evt.getComponent(),
+                    evt.getX(), evt.getY());
+        }
+    }//GEN-LAST:event_lt_juegosMouseClicked
 
     public String Id() {
         String id = "";
@@ -1737,6 +1792,7 @@ public class Tienda extends javax.swing.JFrame {
     private javax.swing.JMenuItem ListarJuegos;
     private javax.swing.JDialog ModConsola;
     private javax.swing.JMenuItem ModificarConsola;
+    private javax.swing.JMenuItem Modjuego;
     private javax.swing.JSpinner Sp_Contoles;
     private javax.swing.JSpinner Sp_Contoles1;
     private javax.swing.JSpinner Sp_bateria;
@@ -1763,6 +1819,7 @@ public class Tienda extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup4;
     private javax.swing.JComboBox<String> cb_tampant;
     private javax.swing.JComboBox<String> cb_tampant1;
+    private javax.swing.JMenuItem elimjuego;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1829,6 +1886,7 @@ public class Tienda extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JPopupMenu jPopupMenu1;
+    private javax.swing.JPopupMenu jPopupMenu2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
