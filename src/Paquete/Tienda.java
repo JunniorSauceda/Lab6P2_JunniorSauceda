@@ -920,6 +920,11 @@ public class Tienda extends javax.swing.JFrame {
         jPopupMenu2.add(Modjuego);
 
         elimjuego.setText("eliminar Juego");
+        elimjuego.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                elimjuegoActionPerformed(evt);
+            }
+        });
         jPopupMenu2.add(elimjuego);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -1726,6 +1731,15 @@ public class Tienda extends javax.swing.JFrame {
                     evt.getX(), evt.getY());
         }
     }//GEN-LAST:event_lt_juegosMouseClicked
+
+    private void elimjuegoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_elimjuegoActionPerformed
+        // TODO add your handling code here:
+        try {
+            consolas.get(tb_listar.getSelectedRow()).getJuegos().remove(lt_juegos.getSelectedIndex());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error");
+        }
+    }//GEN-LAST:event_elimjuegoActionPerformed
 
     public String Id() {
         String id = "";

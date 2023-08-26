@@ -1348,6 +1348,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="eliminar Juego"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="elimjuegoActionPerformed"/>
+          </Events>
         </MenuItem>
       </SubComponents>
     </Container>
