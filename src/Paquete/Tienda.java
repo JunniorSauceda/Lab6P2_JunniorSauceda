@@ -1490,7 +1490,7 @@ public class Tienda extends javax.swing.JFrame {
 
         try {
             jPanel3.setVisible(false);
-
+            jPanel6.setVisible(true);
             tb_listar.setModel(new javax.swing.table.DefaultTableModel(new Object[][]{}, new String[]{
                 "ID", "Fabricante", "Uso", "Modelo", "Pantalla", "Bateria", "Estuche", "Controles", "Almacen", "Conexion", "Precio"
             }));
